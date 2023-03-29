@@ -1,34 +1,30 @@
-import { useState } from "react";
-import { InputFormField } from "../components/InputFormField";
-import { RandomNameButton } from "../components/RandomNameButton";
-import { SubmitFormField } from "../components/SubmitFormField"
+import { useContext } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { SignInForm } from "../components/SignInForm";
+import { AppContext } from "../contexts/AppContext";
+import { MessageOfTheDay } from "../components/MessageOfTheDay";
 
-export function SignInPage(props) {
-   /* const stateArray = useState('');
-    const formState = stateArray[0];
-    const setFormState = stateArray[1];*/
-    const [ formState, setFormState ] = useState('');
+export function SignInPage() {
+    const context = useContext(AppContext);
 
-    function handleSubmit (event){
-        event.preventDefault();
-       // console.log(formState);
-       props.onSubmit(formState);
+    
+    function handleSubmit(formData) {
+        context.setUsername(formData.username);
+        context.setAvatarIndex(formData.avatarIndex);
     }
 
-    function handleUsernameChange(value) {
-        setFormState(value);
-    }
+    
 
-    console.log(formState);
+if (context.isSignedIn) {
+    return <Navigate to="/chat" replace />;
+}
 
     return (
         <div className="sign-in-page">
+            <MessageOfTheDay />
             <div className="card">
-                <form className="sign-in-form" onSubmit={handleSubmit}>
-                    <InputFormField  label="Username" type="text" onChange={handleUsernameChange} value={formState} />
-                    <RandomNameButton onRandomName={handleUsernameChange} />
-                    <SubmitFormField label="Sign-in"/>
-                </form>
+                <SignInForm onSubmit={handleSubmit} />
+                <Link to="/faq">Read the FAQ</Link>
             </div>
         </div>
     );

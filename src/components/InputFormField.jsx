@@ -1,3 +1,6 @@
+import "../styles/InputFormField.css";
+import { FormField } from "./FormField";
+
 export function InputFormField(props) {
     function handleChange(event) {
         /*console.log(event.target.value);*/
@@ -5,10 +8,10 @@ export function InputFormField(props) {
     }
 
     return (
-
-    <div className="input-form-field"> 
+        <FormField>
+        
         <label>{props.label}</label>
         <input type={props.type} onChange={handleChange} value={props.value}/>
-    </div>
-            );
+        </FormField>
+        );
 };

@@ -1,0 +1,8 @@
+.button  {
+    width: auto;
+    border-radius: 10px;
+    background-color: rgb(130, 99, 150);
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 35px;
+}
